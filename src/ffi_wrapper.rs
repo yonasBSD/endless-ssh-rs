@@ -45,7 +45,7 @@ pub(crate) fn set_up_handler(
         sa_sigaction: handler as usize,
         sa_flags: 0,
         sa_mask: unsafe { MaybeUninit::<sigset_t>::zeroed().assume_init() },
-        #[cfg(not(target_os = "macos"))]
+        #[cfg(not(any(target_os = "macos", target_os = "freebsd", target_os = "openbsd", target_os = "netbsd", target_os = "dragonfly")))]
         sa_restorer: None,
     };
 
